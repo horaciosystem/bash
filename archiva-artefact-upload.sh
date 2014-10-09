@@ -10,15 +10,15 @@ for i in $(find . -name *.pom); do
  BASEDIR=$(dirname $i)
  file="$BASEDIR/$artifactId-$version.jar"
 
- repository="internal/"
+ repository="internal"
  if [[ $version == *SNAPSHOT* ]]
  then
-  repository="snapshots/";
+  repository="snapshots";
  fi
 
- remote_url="http://archiva.systextil.com.br:9090/archiva/repository/$repository"
+ remote_url="http://archiva.systextil.com.br:9090/archiva/repository/$repository/"
 
- mvn deploy:deploy-file -DgroupId=$groupId -DartifactId=$artifactId -Dpackaging=jar -Dversion=$version -Dfile=$file -DgeneratePom=true -DrepositoryId=internal -Durl=${remote_url} 
+ mvn deploy:deploy-file -DgroupId=$groupId -DartifactId=$artifactId -Dpackaging=jar -Dversion=$version -Dfile=$file -DgeneratePom=true -DrepositoryId=$repository -Durl=${remote_url} 
  
 done
 
